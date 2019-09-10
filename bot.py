@@ -20,7 +20,7 @@ def image(update, context):
     miao = requests.get(m["file_path"])
     with open("latestsearch.jpg", "wb") as file:
         file.write(miao.content)
-    saucenao = SauceNao(directory='directory', databases=999, minimum_similarity=65, combine_api_types=False, api_key='9d56eed8f97fc5e1516aad961c6fd8c2a3847b6c',
+    saucenao = SauceNao(directory='directory', databases=999, minimum_similarity=65, combine_api_types=False, api_key='<YOUR_SAUCENAO_API_KEY>',
                     exclude_categories='', move_to_categories=False,  use_author_as_category=False,
                     output_type=SauceNao.API_HTML_TYPE, start_file='', log_level=logging.ERROR,
                     title_minimum_similarity=90)
@@ -55,7 +55,7 @@ def image(update, context):
     for i in range(0,len(pages)):
         bot.sendMessage(chat_id = chat_id, text = pages[str(x)]["textstring"])
         x += 1
-updater = Updater(token='706354338:AAGDRyDfDcTEW3D0INhV7Wt1VUjoxm5vSng', use_context=True)
+updater = Updater(token='YOUR_TELEGRAM_BOT_TOKEN', use_context=True)
 dispatcher = updater.dispatcher
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
                      level=logging.INFO)
