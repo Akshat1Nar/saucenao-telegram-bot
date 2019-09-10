@@ -12,6 +12,9 @@ from saucenao import SauceNao
 import os
 from pprint import pprint
 path = os.getcwd()
+def setapi(update, context):
+    chat_id = update.message.chat_id
+    bot = context.bot
 
 def image(update, context):
     chat_id = update.message.chat_id
@@ -49,7 +52,6 @@ def image(update, context):
         for i in range(0,urlnumber):
             pages[str(x)]["textstring"] += pages[str(x)]["ext_urls"][z] + "\n"
             z += 1
-        print(pages[str(x)]["textstring"])
         x += 1
     x = 0
     for i in range(0,len(pages)):
@@ -62,3 +64,4 @@ logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s
 img_handler = MessageHandler(Filters.photo | Filters.document | Filters.video , image)
 dispatcher.add_handler(img_handler)
 updater.start_polling()
+print("Bot Running")
