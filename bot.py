@@ -55,7 +55,7 @@ def image(update, context):
     for i in range(0,len(pages)):
         bot.sendMessage(chat_id = chat_id, text = pages[str(x)]["textstring"])
         x += 1
-updater = Updater(token='YOUR_TELEGRAM_BOT_TOKEN', use_context=True)
+updater = Updater(token='<YOUR_TELEGRAM_BOT_TOKEN>', use_context=True)
 dispatcher = updater.dispatcher
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
                      level=logging.INFO)
