@@ -1,0 +1,11 @@
+Version: 0.1.0
+ + First working version
+Version: 0.1.2
+ - Removed testphase files from master branch, now they're in Oldtestphase branch
+ + Added "create UsersAPIs.data"
+ + Added setapi command
+ + Added showmeapi command
+Version: 0.2.0
+ - Changed "create UsersAPIs.data" to "create UsersPers.data"
+ + Added setsimilarity command
+ + Added register command
