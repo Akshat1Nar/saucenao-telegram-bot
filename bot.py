@@ -3,7 +3,7 @@ Coded by Vincenzo Sabella
 Licensed under GNU Affero GPL 3.0 License, you should have received a copy with the software, otherwise you can find a
 copy here: https://www.gnu.org/licenses/agpl-3.0.en.html
 
-version : 0.2.0
+version : 0.2.1
 '''
 import logging
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
@@ -12,6 +12,10 @@ from saucenao import SauceNao
 import os
 import pickle
 path = os.getcwd()
+def start(update, context):
+    chat_id = update.message.chat_id
+    bot.sendMessage(chat_id=chat_id, text="Welcome to SauceNao Search Bot!\n"
+                                          "if you like it please consider [donating](https://paypal.me/pools/c/8i8yRBYigc) and sharing the bot", parse_mode="Markdown")
 def register(update, context):
     chat_id = update.message.chat_id
     bot = context.bot
@@ -110,10 +114,12 @@ setapi_handler = CommandHandler("setapi", setapi_callback)
 showmeapi_handler = CommandHandler("showmeapi", showmeapi)
 register_handler = CommandHandler("register", register)
 setsimilarity_handler = CommandHandler("setsimilarity", setsimilarity_callback)
+start_handler = CommandHandler("start", start)
 dispatcher.add_handler(img_handler)
 dispatcher.add_handler(setapi_handler)
 dispatcher.add_handler(showmeapi_handler)
 dispatcher.add_handler(register_handler)
 dispatcher.add_handler(setsimilarity_handler)
+dispatcher.add_handler(start_handler)
 updater.start_polling()
 print("Bot Running")
