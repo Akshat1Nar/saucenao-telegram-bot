@@ -9,3 +9,5 @@ Version: 0.2.0
  - Changed "create UsersAPIs.data" to "create UsersPers.data"
  + Added setsimilarity command
  + Added register command
+Version: 0.2.1
+ + Added start command
