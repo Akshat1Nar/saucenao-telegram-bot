@@ -14,6 +14,7 @@ import pickle
 path = os.getcwd()
 def start(update, context):
     chat_id = update.message.chat_id
+    bot = context.bot
     bot.sendMessage(chat_id=chat_id, text="Welcome to SauceNao Search Bot!\n"
                                           "if you like it please consider [donating](https://paypal.me/pools/c/8i8yRBYigc) and sharing the bot", parse_mode="Markdown")
 def register(update, context):
