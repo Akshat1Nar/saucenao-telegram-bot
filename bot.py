@@ -3,18 +3,23 @@ Coded by Vincenzo Sabella
 Licensed under GNU Affero GPL 3.0 License, you should have received a copy with the software, otherwise you can find a
 copy here: https://www.gnu.org/licenses/agpl-3.0.en.html
 
-version : 0.1.0
+version : 0.1.2
 '''
 import logging
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 import requests
 from saucenao import SauceNao
 import os
-from pprint import pprint
+import pickle
 path = os.getcwd()
-def setapi(update, context):
+def setapi_callback(update, context):
     chat_id = update.message.chat_id
     bot = context.bot
+    user_says = " ".join(context.args)
+    Users = pickle.load(open("UsersAPIs.data", "rb"))
+    Users[chat_id] = {}
+    Users[chat_id]["api"] = user_says
+    pickle.dump(Users, open("UsersAPIs.data", "wb"))
 
 def image(update, context):
     chat_id = update.message.chat_id
@@ -57,11 +62,13 @@ def image(update, context):
     for i in range(0,len(pages)):
         bot.sendMessage(chat_id = chat_id, text = pages[str(x)]["textstring"])
         x += 1
-updater = Updater(token='<YOUR_TELEGRAM_BOT_TOKEN>', use_context=True)
+updater = Updater(token='<BOT_TOKEN>', use_context=True)
 dispatcher = updater.dispatcher
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
                      level=logging.INFO)
-img_handler = MessageHandler(Filters.photo | Filters.document | Filters.video , image)
+img_handler = MessageHandler(Filters.photo | Filters.document, image)
+setapi_handler = CommandHandler("setapi", setapi_callback)
 dispatcher.add_handler(img_handler)
+dispatcher.add_handler(setapi_handler)
 updater.start_polling()
 print("Bot Running")
